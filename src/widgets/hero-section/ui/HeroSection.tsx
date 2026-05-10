@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { Button } from '@/shared/ui/button';
 
 export function HeroSection() {
-  const { data: FALLBACK_DATA } = useTranslation();
+  const { data: FALLBACK_DATA, t } = useTranslation();
   const [data, setData] = useState<SiteSection | null>(null);
   
   useEffect(() => {
@@ -83,7 +83,7 @@ export function HeroSection() {
           <a href={`https://wa.me/${washappNumber.replace(/\\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
              <Button size="lg" className="h-14 py-4 px-8 rounded-full !bg-[#25D366] hover:!bg-[#1DA851] text-white text-base font-semibold shadow-[0_0_15px_rgba(37,211,102,0.4)] transition-all hover:scale-105 w-full sm:w-auto">
                 <MessageCircle className="mr-2 h-5 w-5" />
-                Reservar por WhatsApp
+                {t.hero.reserveWhatsApp}
              </Button>
           </a>
 
@@ -100,7 +100,7 @@ export function HeroSection() {
 
       {/* SCROLL INDICATOR ANIMADO */}
       <div className="absolute z-20 bottom-6 lg:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-         <span className="text-white/60 text-xs tracking-widest uppercase mb-2 animate-pulse">Explorar</span>
+         <span className="text-white/60 text-xs tracking-widest uppercase mb-2 animate-pulse">{t.hero.explore}</span>
          <div className="animate-bounce">
             <ChevronDown className="text-white/80 h-6 w-6" />
          </div>
