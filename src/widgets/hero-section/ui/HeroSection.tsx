@@ -58,7 +58,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
 
       {/* CONTENEDOR CENTRAL */}
-      <div className="relative z-20 container mx-auto px-6 lg:px-12 flex flex-col items-center text-center mt-12">
+      <div className="relative z-20 container mx-auto px-6 lg:px-12 flex flex-col items-center text-center pt-24 sm:pt-16 md:pt-0 mt-12">
         
         {/* Subtitulillo Anunciador */}
         <span className="animate-in fade-in slide-in-from-bottom-4 duration-700 font-inter text-sm md:text-base tracking-[0.25em] text-white/80 uppercase font-medium mb-6">
