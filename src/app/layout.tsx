@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { fraunces, inter } from './fonts';
 import { Toaster } from 'sonner';
 import { TranslationProvider } from '@/shared/lib/TranslationProvider';
 import './globals.css';
+
+const GA_ID = 'G-WT40C1X5S0';
 
 export const metadata: Metadata = {
   title: {
@@ -62,6 +65,20 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} ${fraunces.variable} h-full antialiased scroll-smooth`}
     >
+      {/* Google Analytics */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}');
+        `}
+      </Script>
+
       <body className="min-h-full flex flex-col">
         <TranslationProvider>
           {children}
