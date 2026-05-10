@@ -7,6 +7,7 @@ import { apiClient } from '@/shared/api/apiClient';
 import { ALBUMS } from '@/shared/config/api-endpoints';
 import { FolderOpen, Loader2, Home, ChevronRight } from 'lucide-react';
 import { FALLBACK_DATA } from '@/shared/config/public-data';
+import { useTranslation } from '@/shared/lib/TranslationProvider';
 
 // ── Types ───────────────────────────────────────────────────────────
 
@@ -28,16 +29,17 @@ type GlobalStats = {
   totalVideos: number;
 };
 
-function formatStats(photos: number, videos: number) {
+function formatStats(photos: number, videos: number, tGallery: any) {
   const parts = [];
-  if (photos > 0) parts.push(`${photos} ${photos === 1 ? 'foto' : 'fotos'}`);
-  if (videos > 0) parts.push(`${videos} ${videos === 1 ? 'video' : 'videos'}`);
-  return parts.join(' · ') || '0 items';
+  if (photos > 0) parts.push(`${photos} ${photos === 1 ? tGallery.photo : tGallery.photos}`);
+  if (videos > 0) parts.push(`${videos} ${videos === 1 ? tGallery.video : tGallery.videos}`);
+  return parts.join(' · ') || `0 ${tGallery.items}`;
 }
 
 // ── Component ───────────────────────────────────────────────────────
 
 export default function GaleriaPage() {
+  const { t } = useTranslation();
   const [albums, setAlbums] = useState<Album[]>([]);
   const [stats, setStats] = useState<GlobalStats>({ totalAlbums: 0, totalPhotos: 0, totalVideos: 0 });
   const [isLoading, setIsLoading] = useState(true);
@@ -97,26 +99,26 @@ export default function GaleriaPage() {
           <nav className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-stone-500 mb-8 font-medium overflow-x-auto whitespace-nowrap pb-2">
             <Link href="/#galeria" className="hover:text-green-700 transition-colors flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-stone-200/60 shadow-sm">
               <Home className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Inicio</span>
+              <span className="hidden sm:inline">{t.galleryPage.home}</span>
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-stone-300 shrink-0" />
             <span className="text-green-800 bg-green-50 px-3 py-1.5 rounded-full border border-green-100 shadow-sm truncate">
-              Galería
+              {t.galleryPage.gallery}
             </span>
           </nav>
 
           <h1 className="font-fraunces text-4xl md:text-5xl font-bold text-stone-900 leading-tight">
-            Galería
+            {t.galleryPage.heading}
           </h1>
           <p className="text-stone-500 mt-4 text-lg font-light max-w-2xl leading-relaxed">
-            Explora nuestras colecciones de fotos y videos reales de los cenotes en Homún, Yucatán.
+            {t.galleryPage.description}
           </p>
           
           {/* Stats Globales */}
           <div className="mt-8 flex items-center gap-4">
             <div className="h-[1px] w-8 bg-green-600/40" />
             <p className="text-[11px] tracking-[0.3em] uppercase font-medium text-green-700">
-              {stats.totalAlbums} ÁLBUM{stats.totalAlbums !== 1 ? 'ES' : ''} · {stats.totalPhotos} FOTOS · {stats.totalVideos} VIDEO{stats.totalVideos !== 1 ? 'S' : ''}
+              {stats.totalAlbums} {stats.totalAlbums !== 1 ? t.galleryPage.albums : t.galleryPage.album} · {stats.totalPhotos} {t.galleryPage.photos.toUpperCase()} · {stats.totalVideos} {stats.totalVideos !== 1 ? t.galleryPage.videos.toUpperCase() : t.galleryPage.video.toUpperCase()}
             </p>
             <div className="h-[1px] w-8 bg-green-600/40" />
           </div>
@@ -130,7 +132,7 @@ export default function GaleriaPage() {
         ) : albums.length === 0 ? (
           <div className="text-center py-20">
             <FolderOpen className="h-16 w-16 mx-auto text-stone-300 mb-4" />
-            <p className="text-stone-500 text-lg">Próximamente nuevas colecciones.</p>
+            <p className="text-stone-500 text-lg">{t.galleryPage.comingSoon}</p>
           </div>
         ) : (
           /* ═══ GRID DE ÁLBUMES ═══ */
@@ -146,7 +148,7 @@ export default function GaleriaPage() {
                   {/* Badge destacado */}
                   {album.destacado && (
                     <div className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] tracking-widest uppercase text-green-800 font-medium shadow-sm">
-                      Destacado
+                      {t.galleryPage.featured}
                     </div>
                   )}
 
@@ -181,7 +183,7 @@ export default function GaleriaPage() {
                   {/* Info */}
                   <div className="p-6 bg-white">
                     <p className="text-[10px] tracking-widest uppercase text-green-700 font-semibold mb-2">
-                      Homún · Yucatán
+                      {t.galleryPage.location}
                     </p>
                     <h3 className="font-fraunces text-xl font-medium text-stone-900 group-hover:text-green-800 transition-colors capitalize">
                       {album.titulo.toLowerCase()}
@@ -192,7 +194,7 @@ export default function GaleriaPage() {
                       </p>
                     )}
                     <p className="text-stone-400 text-xs mt-4 font-medium">
-                      {formatStats(album.photosCount, album.videosCount)}
+                      {formatStats(album.photosCount, album.videosCount, t.galleryPage)}
                     </p>
                   </div>
                 </div>

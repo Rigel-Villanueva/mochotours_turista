@@ -18,7 +18,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
 };
 
 export function AboutGuide() {
-  const { data: FALLBACK_DATA } = useTranslation();
+  const { data: FALLBACK_DATA, t } = useTranslation();
   const [aboutData, setAboutData] = useState<{
     titulo?: string | null;
     descripcion?: string | null;
@@ -85,10 +85,10 @@ export function AboutGuide() {
             }`}
           >
             <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
-              Conoce a tu guía
+              {t.about.label}
             </span>
             <h2 className="font-fraunces text-4xl sm:text-5xl font-bold text-stone-900 leading-tight">
-              Hola, soy <span className="text-primary">{guide.nombre_corto}</span>
+              {t.about.greeting} <span className="text-primary">{guide.nombre_corto}</span>
             </h2>
           </div>
 
@@ -138,10 +138,10 @@ export function AboutGuide() {
             {/* Título Desktop (Oculto en móvil) */}
             <div className="hidden lg:flex flex-col gap-2">
               <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
-                Conoce a tu guía
+                {t.about.label}
               </span>
               <h2 className="font-fraunces text-5xl font-bold text-stone-900 leading-tight">
-                Hola, soy <span className="text-primary">{guide.nombre_corto}</span>
+                {t.about.greeting} <span className="text-primary">{guide.nombre_corto}</span>
               </h2>
             </div>
 
@@ -181,7 +181,7 @@ export function AboutGuide() {
                   size="lg"
                   className="w-auto rounded-full border-stone-300 text-stone-700 hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all duration-300 group px-8 h-14"
                 >
-                  Conoce la experiencia
+                  {t.about.ctaButton}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>

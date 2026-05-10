@@ -15,7 +15,7 @@ interface LocationMapProps {
 }
 
 export function LocationMap({ contactInfo }: LocationMapProps) {
-  const { data: FALLBACK_DATA } = useTranslation();
+  const { data: FALLBACK_DATA, t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [locationData, setLocationData] = useState<{
@@ -108,7 +108,7 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
           }`}
         >
           <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
-            Ubicación y Contacto
+            {t.location.label}
           </span>
           <h2 className="font-fraunces text-4xl lg:text-5xl font-bold text-stone-900 mt-3">
             {titulo}
@@ -116,7 +116,7 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
 
           {/* Subtítulo SEO descriptivo */}
           <p className="text-stone-500 mt-4 max-w-2xl mx-auto text-base lg:text-lg font-light leading-relaxed">
-            {descripcion}
+            {t.location.description}
           </p>
 
           {/* Social Proof — Rating de Google Prominente */}
@@ -148,7 +148,7 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
             </div>
             
             <span className="text-xs text-stone-500 font-medium group-hover:text-stone-800 transition-colors">
-              (11 reseñas)
+              (11 {t.location.reviews})
             </span>
           </Link>
         </div>
@@ -185,8 +185,8 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent flex flex-col justify-end p-6 pointer-events-none">
-                <span className="text-white/90 text-[10px] tracking-widest uppercase font-bold mb-1 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">Tours en Yucatán</span>
-                <p className="text-white font-medium text-lg drop-shadow-md translate-y-0 transition-transform duration-500">¡Tu aventura en los cenotes de Homún te espera!</p>
+                <span className="text-white/90 text-[10px] tracking-widest uppercase font-bold mb-1 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">{t.location.toursLabel}</span>
+                <p className="text-white font-medium text-lg drop-shadow-md translate-y-0 transition-transform duration-500">{t.location.adventureAwaits}</p>
               </div>
             </div>
           </div>
@@ -217,10 +217,10 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
               {/* Caption editorial (Hardcoded) — Responsive visibility */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 lg:p-6 pointer-events-none">
                 <span className="text-white/80 text-[11px] tracking-[0.1em] uppercase font-semibold">
-                  Bienvenido
+                  {t.location.welcome}
                 </span>
                 <span className="text-white text-base font-medium mt-1">
-                  Tu próxima aventura en Yucatán
+                  {t.location.nextAdventure}
                 </span>
               </div>
             </div>
@@ -242,7 +242,7 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                   <MapPin className="h-4 w-4 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-stone-900 text-sm">Dirección</h3>
+                  <h3 className="font-semibold text-stone-900 text-sm">{t.location.address}</h3>
                   <p className="text-stone-600 text-xs mt-0.5 leading-relaxed">{loc.direccion}</p>
                 </div>
               </Link>
@@ -253,8 +253,8 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                   <Clock className="h-4 w-4 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-stone-900 text-sm">Horarios</h3>
-                  <p className="text-stone-600 text-xs mt-0.5">Todos los días de 9:00 am a 6:00 pm</p>
+                  <h3 className="font-semibold text-stone-900 text-sm">{t.location.hours}</h3>
+                  <p className="text-stone-600 text-xs mt-0.5">{t.location.hoursValue}</p>
                 </div>
               </div>
 
@@ -271,8 +271,8 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-stone-900 text-sm flex items-center gap-2">
-                    Reservaciones
-                    <span className="text-[10px] bg-primary text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Principal</span>
+                    {t.location.reservations}
+                    <span className="text-[10px] bg-primary text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">{t.location.primary}</span>
                   </h3>
                   <span className="text-primary text-xs font-medium mt-1 inline-flex items-center gap-1">
                     +52 999 120 02 05
@@ -294,8 +294,8 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-stone-900 text-sm flex items-center gap-2">
-                    Otro número
-                    <span className="text-[10px] bg-stone-200 text-stone-600 px-2 py-0.5 rounded-full font-bold tracking-wide">Secundario</span>
+                    {t.location.altNumber}
+                    <span className="text-[10px] bg-stone-200 text-stone-600 px-2 py-0.5 rounded-full font-bold tracking-wide">{t.location.secondary}</span>
                   </h3>
                   <span className="text-stone-600 text-xs hover:text-primary mt-1 inline-flex items-center gap-1">
                     +52 999 416 64 37
@@ -310,8 +310,8 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                   <Car className="h-4 w-4 text-stone-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-stone-900 text-sm">Estacionamiento</h3>
-                  <p className="text-stone-600 text-xs mt-0.5">Totalmente gratuito</p>
+                  <h3 className="font-semibold text-stone-900 text-sm">{t.location.parking}</h3>
+                  <p className="text-stone-600 text-xs mt-0.5">{t.location.parkingValue}</p>
                 </div>
               </div>
 
@@ -321,8 +321,8 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                   <CreditCard className="h-4 w-4 text-stone-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-stone-900 text-sm">Métodos de pago</h3>
-                  <p className="text-stone-600 text-xs mt-0.5">Efectivo y transferencia</p>
+                  <h3 className="font-semibold text-stone-900 text-sm">{t.location.payment}</h3>
+                  <p className="text-stone-600 text-xs mt-0.5">{t.location.paymentValue}</p>
                 </div>
               </div>
 
@@ -332,8 +332,8 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                   <ShieldCheck className="h-4 w-4 text-stone-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-stone-900 text-sm">Seguridad y Confianza</h3>
-                  <p className="text-stone-600 text-xs mt-0.5">Operador con +10 años de experiencia. Seguridad incluida.</p>
+                  <h3 className="font-semibold text-stone-900 text-sm">{t.location.safety}</h3>
+                  <p className="text-stone-600 text-xs mt-0.5">{t.location.safetyValue}</p>
                 </div>
               </div>
             </div>
@@ -352,7 +352,7 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                   className="w-full rounded-xl border-stone-300 text-stone-700 hover:bg-stone-900 hover:text-white hover:border-stone-900 h-13 text-sm font-semibold transition-all duration-300 group"
                 >
                   <Navigation className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  Cómo llegar
+                  {t.location.getDirections}
                 </Button>
               </Link>
 
@@ -369,7 +369,7 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
                   className="w-full rounded-xl !bg-[#25D366] hover:!bg-[#1DA851] text-white h-13 text-sm font-semibold shadow-[0_0_12px_rgba(37,211,102,0.3)] hover:shadow-[0_0_20px_rgba(37,211,102,0.4)] transition-all duration-300 hover:scale-[1.02]"
                 >
                   <MessageCircle className="mr-2 h-4 w-4" />
-                  Reservar por WhatsApp
+                  {t.location.reserveWhatsApp}
                 </Button>
               </a>
             </div>

@@ -2,46 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
-
-// ── FAQ Data ────────────────────────────────────────────────────────
-
-const FAQ_ITEMS = [
-  {
-    question: '¿Cuánto cuesta un tour de cenotes en Homún?',
-    answer:
-      'Los precios varían según el tamaño del grupo y la ruta elegida. Contáctanos por WhatsApp al +52 999 120 02 05 para recibir una cotización personalizada. Aceptamos efectivo y transferencia bancaria, con un 25% de anticipo al reservar.',
-  },
-  {
-    question: '¿Cuánto tiempo dura el tour?',
-    answer:
-      'El tour completo dura de 4 a 5 horas. Visitamos de 3 a 4 cenotes por recorrido, incluyendo cenotes como Tzajuncat, Holcozón, Baalmil, Yaxbacaltún y Santa Rosa.',
-  },
-  {
-    question: '¿Cuántos cenotes se visitan por día?',
-    answer:
-      'Se visitan de 3 a 4 cenotes por tour. La ruta se personaliza según tus preferencias: cenotes familiares de fácil acceso, cenotes extremos para aventureros, o grutas subterráneas.',
-  },
-  {
-    question: '¿Es seguro nadar en los cenotes de Homún?',
-    answer:
-      'Sí. Nuestro guía Pedro Poot está certificado en primeros auxilios y tiene más de 10 años de experiencia. Hay cenotes de fácil acceso aptos para niños y adultos mayores. El uso de chaleco salvavidas es obligatorio; el guía los ofrece por $70 MXN por persona para usar durante todo el tour.',
-  },
-  {
-    question: '¿Cómo llegar a los cenotes de Homún desde Mérida?',
-    answer:
-      'Homún está a solo 1 hora de Mérida por carretera. Nuestro punto de encuentro es en Calle 20 entre 5 y 5a, a 50 metros de la gasolinera Pemex. Contamos con estacionamiento gratuito. Desde ahí, te transportamos en moto-taxi tradicional.',
-  },
-  {
-    question: '¿Es apto para niños y adultos mayores?',
-    answer:
-      'Sí. Ofrecemos cenotes familiares de fácil acceso, perfectos para bebés, niños y adultos mayores. El guía ofrece renta de chalecos por $70 MXN por persona para todo el tour. Los grupos se adaptan desde 2 hasta 50 personas.',
-  },
-  {
-    question: '¿Se puede comer comida típica después del tour?',
-    answer:
-      'Sí. Al terminar el recorrido te podemos llevar a probar la auténtica comida tradicional yucateca preparada por locales.',
-  },
-];
+import { useTranslation } from '@/shared/lib/TranslationProvider';
 
 // ── Accordion Item ──────────────────────────────────────────────────
 
@@ -65,7 +26,8 @@ function AccordionItem({
 
   useEffect(() => {
     if (contentRef.current) {
-      setMaxHeight(isOpen ? contentRef.current.scrollHeight : 0);
+      const targetHeight = isOpen ? contentRef.current.scrollHeight : 0;
+      setTimeout(() => setMaxHeight(targetHeight), 0);
     }
   }, [isOpen]);
 
@@ -111,6 +73,7 @@ function AccordionItem({
 // ── FAQ Section ─────────────────────────────────────────────────────
 
 export function FaqSection() {
+  const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState(0); // Primera abierta por defecto
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -133,7 +96,7 @@ export function FaqSection() {
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map((item) => ({
+    mainEntity: t.faq.items.map((item) => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: {
@@ -162,16 +125,16 @@ export function FaqSection() {
           }`}
         >
           <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
-            Preguntas Frecuentes
+            {t.faq.label}
           </span>
           <h2 className="font-fraunces text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 leading-tight mt-3">
-            Lo que más nos preguntan
+            {t.faq.heading}
           </h2>
         </div>
 
         {/* Acordeón */}
         <div className="bg-white rounded-2xl shadow-sm border border-stone-100 px-5 sm:px-8">
-          {FAQ_ITEMS.map((item, i) => (
+          {t.faq.items.map((item, i) => (
             <AccordionItem
               key={i}
               question={item.question}

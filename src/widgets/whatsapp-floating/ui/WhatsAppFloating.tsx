@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
 import { FALLBACK_DATA } from '@/shared/config/public-data';
+import { useTranslation } from '@/shared/lib/TranslationProvider';
 import type { ContactInfo } from '@/shared/api/getContactInfo';
 
 interface WhatsAppFloatingProps {
@@ -11,6 +12,7 @@ interface WhatsAppFloatingProps {
 }
 
 export function WhatsAppFloating({ contactInfo }: WhatsAppFloatingProps) {
+  const { t } = useTranslation();
   const [show, setShow] = useState(false);
   const phone = contactInfo?.phonePrimary || FALLBACK_DATA.contacto.telefono_whatsapp_principal;
   
@@ -27,7 +29,7 @@ export function WhatsAppFloating({ contactInfo }: WhatsAppFloatingProps) {
 
   return (
     <a
-      href={`https://wa.me/${cleanPhone}?text=Hola%2C%20me%20interesa%20reservar%20un%20tour%20de%20cenotes`}
+      href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(t.whatsapp.message)}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contáctanos por WhatsApp"

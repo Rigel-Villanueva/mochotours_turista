@@ -14,7 +14,7 @@ interface ContactFooterProps {
 }
 
 export function ContactFooter({ contactInfo }: ContactFooterProps) {
-  const { data: FALLBACK_DATA } = useTranslation();
+  const { data: FALLBACK_DATA, t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [footerData, setFooterData] = useState<{
@@ -107,7 +107,7 @@ export function ContactFooter({ contactInfo }: ContactFooterProps) {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
-          Contacto
+          {t.contact.label}
         </span>
 
         {/* Título (mejorado para mobile) */}
@@ -140,11 +140,11 @@ export function ContactFooter({ contactInfo }: ContactFooterProps) {
               className="w-full h-14 rounded-xl !bg-[#25D366] hover:!bg-[#1DA851] text-white shadow-[0_4px_14px_rgba(37,211,102,0.3)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.4)] transition-all hover:-translate-y-0.5 text-base font-semibold"
             >
               <MessageCircle className="mr-2 h-5 w-5" />
-              Reservar por WhatsApp
+              {t.contact.reserveWhatsApp}
             </Button>
           </a>
           <p className="text-white/80 text-sm mt-3 font-medium flex items-center gap-1.5">
-            <span>⚡</span> Respondemos en menos de 10 minutos
+            <span>⚡</span> {t.contact.responseTime}
           </p>
         </div>
 
@@ -155,13 +155,13 @@ export function ContactFooter({ contactInfo }: ContactFooterProps) {
           }`}
         >
           <span className="text-white/70 text-xs font-bold tracking-[0.2em] uppercase mb-4">
-            ¿PREFIERES OTRO MEDIO?
+            {t.contact.preferOther}
           </span>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full max-w-[600px]">
             <Link href={`tel:+${phone1}`} aria-label="Llamar al número principal" className="w-full">
               <Button variant="outline" className="w-full h-12 rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-stone-900 transition-all active:scale-95">
                 <Phone className="mr-2 h-4 w-4" />
-                Llamar
+                {t.contact.call}
               </Button>
             </Link>
             <a href={`https://wa.me/${cleanPhone2}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" aria-label="Contactar al número alterno" className="w-full">
@@ -170,13 +170,13 @@ export function ContactFooter({ contactInfo }: ContactFooterProps) {
                 className="w-full h-12 rounded-xl border-stone-800 bg-stone-900/50 hover:bg-stone-800 text-stone-300 hover:text-white transition-colors"
               >
                 <MessageCircle className="mr-2 h-4 w-4" />
-                Número alterno
+                {t.contact.altNumber}
               </Button>
             </a>
             <Link href={`mailto:${emailVal}`} aria-label="Enviar correo electrónico" className="w-full col-span-2 md:col-span-1">
               <Button variant="outline" className="w-full h-12 rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-stone-900 transition-all active:scale-95">
                 <Mail className="mr-2 h-4 w-4" />
-                Correo
+                {t.contact.email}
               </Button>
             </Link>
           </div>
@@ -199,22 +199,22 @@ export function ContactFooter({ contactInfo }: ContactFooterProps) {
             />
             <span className="text-white font-bold text-3xl tracking-wide mt-2">Mochotours</span>
             <p className="text-white/70 text-sm leading-relaxed max-w-[280px]">
-              Tours guiados por los cenotes más impresionantes de Homún, Yucatán. Experiencia auténtica con guías locales.
+              {t.contact.footerDescription}
             </p>
           </div>
 
           {/* Col 2: Secciones */}
           <div className="flex flex-col gap-3">
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">Explora</h4>
-            <Link href="/" className="text-white/60 hover:text-white transition-colors text-sm w-fit">Inicio</Link>
-            <Link href="/#sobre-mi" className="text-white/60 hover:text-white transition-colors text-sm w-fit">Sobre Mí</Link>
-            <Link href="/#experiencia" className="text-white/60 hover:text-white transition-colors text-sm w-fit">Experiencia</Link>
-            <Link href="/galeria" className="text-white/60 hover:text-white transition-colors text-sm w-fit">Galería</Link>
+            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">{t.contact.exploreLabel}</h4>
+            <Link href="/" className="text-white/60 hover:text-white transition-colors text-sm w-fit">{t.contact.home}</Link>
+            <Link href="/#sobre-mi" className="text-white/60 hover:text-white transition-colors text-sm w-fit">{t.contact.aboutMe}</Link>
+            <Link href="/#experiencia" className="text-white/60 hover:text-white transition-colors text-sm w-fit">{t.contact.experienceLink}</Link>
+            <Link href="/galeria" className="text-white/60 hover:text-white transition-colors text-sm w-fit">{t.contact.galleryLink}</Link>
           </div>
 
           {/* Col 3: NAP (Name, Address, Phone) */}
           <div className="flex flex-col gap-3">
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">Contacto</h4>
+            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">{t.contact.contactLabel}</h4>
             <a href={`https://wa.me/${cleanPhone1}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors text-sm flex items-center gap-2 w-fit">
               <Phone className="h-4 w-4" /> +52 {phone1.replace('52', '')}
             </a>
@@ -232,13 +232,13 @@ export function ContactFooter({ contactInfo }: ContactFooterProps) {
 
           {/* Col 4: Horario y Redes */}
           <div className="flex flex-col gap-3">
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">Horario y Redes</h4>
+            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">{t.contact.hoursAndSocial}</h4>
             <span className="text-white/60 text-sm">
-              🕐 Todos los días, 9am – 6pm
+              {t.contact.everyday}
             </span>
             
             <div className="mt-4">
-              <span className="text-white/80 text-xs font-semibold uppercase tracking-wider block mb-3">Síguenos en:</span>
+              <span className="text-white/80 text-xs font-semibold uppercase tracking-wider block mb-3">{t.contact.followUs}</span>
               <div className="flex items-center gap-2.5">
                 {redes.map((red) => {
                   const IconComp = red.Icon;
@@ -264,10 +264,10 @@ export function ContactFooter({ contactInfo }: ContactFooterProps) {
         {/* Bottom bar: Copyright y Créditos */}
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left pt-6 border-t border-white/10">
           <p className="text-white/50 text-xs">
-            © {new Date().getFullYear()} Cenotes Aventura y Más · Homún, Yucatán. Todos los derechos reservados.
+            © {new Date().getFullYear()} Cenotes Aventura y Más · Homún, Yucatán. {t.contact.allRightsReserved}
           </p>
           <p className="text-white/40 text-xs">
-            Sitio creado por{' '}
+            {t.contact.siteCreatedBy}{' '}
             <a 
               href="https://dual-code-solutions.serviciodualcodesolutions-devs.workers.dev/"
               target="_blank"

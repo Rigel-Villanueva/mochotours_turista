@@ -24,7 +24,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
 };
 
 export function ExperienceInfo() {
-  const { data: FALLBACK_DATA } = useTranslation();
+  const { data: FALLBACK_DATA, t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [mototaxiData, setMototaxiData] = useState<{
@@ -94,18 +94,14 @@ export function ExperienceInfo() {
         <div className="text-center mb-12 lg:mb-16">
           <div className="flex justify-center mb-3">
             <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
-              La Experiencia
+              {t.experience.label}
             </span>
           </div>
           <h2 className="font-fraunces text-4xl lg:text-5xl font-bold text-stone-900 leading-tight">
-            Qué incluye tu aventura
+            {t.experience.heading}
           </h2>
           <p className="text-stone-600 mt-4 max-w-2xl mx-auto text-base lg:text-lg font-light text-left sm:text-center">
-            Un tour de cenotes con Mochotours incluye visita a 3 o 4 cenotes,
-            transporte en moto-taxi tradicional y guía local certificado
-            en primeros auxilios. Opción de probar la auténtica comida
-            típica al finalizar el tour. Duración: 4 a 5 horas.
-            Grupos de 2 a 50 personas.
+            {t.experience.description}
           </p>
         </div>
 
@@ -150,15 +146,13 @@ export function ExperienceInfo() {
 
           {/* Título SEO */}
           <h3 className="font-fraunces text-2xl sm:text-3xl lg:text-4xl font-bold text-stone-900 leading-tight text-center mb-4">
-            Los Cenotes Más Visitados de Homún, Yucatán
+            {t.experience.cenotesHeading}
           </h3>
 
           {/* Texto descriptivo */}
           <p className="text-stone-600 text-base lg:text-lg font-light leading-relaxed max-w-3xl mx-auto text-center mb-10 lg:mb-14">
-            Pedro conoce más de <strong className="text-stone-800 font-medium">150 cenotes</strong> en la zona,
-            de los cuales <strong className="text-stone-800 font-medium">32 están abiertos al público</strong>.
-            La ruta se adapta según tus preferencias: cenotes familiares de fácil acceso,
-            cenotes extremos para los aventureros, o grutas subterráneas para los exploradores.
+            {t.experience.cenotesDescription1} <strong className="text-stone-800 font-medium">{t.experience.cenotesDescription2}</strong> {t.experience.cenotesDescription3}
+            <strong className="text-stone-800 font-medium"> {t.experience.cenotesDescription4}</strong>{t.experience.cenotesDescription5}
           </p>
 
           {/* Grid de 5 tarjetas de cenotes */}

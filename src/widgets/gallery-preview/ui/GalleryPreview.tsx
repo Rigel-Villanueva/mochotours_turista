@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useShuffledGallery } from '@/features/shuffle-gallery/model/useShuffledGallery';
+import { useTranslation } from '@/shared/lib/TranslationProvider';
 import { Button } from '@/shared/ui/button';
 import { ImageIcon, Loader2 } from 'lucide-react';
 import Lightbox from 'yet-another-react-lightbox';
@@ -59,6 +60,7 @@ const VideoPreview = ({ src, className, paused, onTogglePause }: { src: string, 
 };
 
 export function GalleryPreview() {
+  const { t } = useTranslation();
   const { images, totalCount, isLoading } = useShuffledGallery();
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -183,13 +185,13 @@ export function GalleryPreview() {
           {/* ═══ ENCABEZADO ═══ */}
           <div className="text-center mb-16">
             <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
-              GALERÍA · FOTOS Y VIDEOS
+              {t.gallery.label}
             </span>
             <h2 className="font-fraunces text-4xl lg:text-5xl font-bold text-stone-900 mt-3">
-              Vive los cenotes de Homún en imágenes
+              {t.gallery.heading}
             </h2>
             <p className="text-stone-500 mt-4 max-w-2xl mx-auto text-base lg:text-lg font-light leading-relaxed">
-              Fotos y videos reales de los cenotes de Homún, Yucatán: aguas turquesas cristalinas, cavernas milenarias, cenotes tipo gruta y cenotes abiertos. Imágenes tomadas durante tours reales con turistas de todo el mundo.
+              {t.gallery.description}
             </p>
           </div>
 
@@ -278,7 +280,7 @@ export function GalleryPreview() {
                 className="rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 px-8 group h-14"
               >
                 <ImageIcon className="mr-2 h-5 w-5" />
-                Ver galería completa{totalCount > 0 ? ` (${totalCount === 1 ? '1 foto' : `${totalCount} fotos`})` : ''}
+                {t.gallery.viewFull}{totalCount > 0 ? ` (${totalCount === 1 ? `1 ${t.gallery.photo}` : `${totalCount} ${t.gallery.photos}`})` : ''}
               </Button>
             </Link>
           </div>

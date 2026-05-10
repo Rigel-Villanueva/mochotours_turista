@@ -156,6 +156,7 @@ export const UI_STRINGS = {
       items: 'items',
       albums: 'ÁLBUMES',
       album: 'ÁLBUM',
+      location: 'Homún · Yucatán',
     },
 
     // ── WhatsApp ──
@@ -316,6 +317,7 @@ export const UI_STRINGS = {
       items: 'items',
       albums: 'ALBUMS',
       album: 'ALBUM',
+      location: 'Homún · Yucatán',
     },
 
     // ── WhatsApp ──
