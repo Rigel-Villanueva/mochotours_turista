@@ -59,7 +59,6 @@ export function LocationMap({ contactInfo }: LocationMapProps) {
   const loc = FALLBACK_DATA.ubicacion;
   const imagenUrl = locationData?.imagenUrl || loc.imagenUrl;
   const titulo = loc.titulo;
-  const descripcion = 'Mochotours se encuentra en Calle 20 entre 5 y 5a, a 50 metros de la gasolinera Pemex en Homún, Yucatán. A solo 1 hora de Mérida por carretera. Abierto todos los días del año de 9am a 6pm. Estacionamiento gratuito. Reserva con 1 día de anticipación por WhatsApp.';
   
   // Utilizar ContactInfo (dinámico) o fallback si algo falla severamente
   const phone1 = contactInfo?.phonePrimary || FALLBACK_DATA.contacto.telefono_whatsapp_principal;

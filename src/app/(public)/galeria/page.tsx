@@ -8,6 +8,7 @@ import { ALBUMS } from '@/shared/config/api-endpoints';
 import { FolderOpen, Loader2, Home, ChevronRight } from 'lucide-react';
 import { FALLBACK_DATA } from '@/shared/config/public-data';
 import { useTranslation } from '@/shared/lib/TranslationProvider';
+import type { UIStrings } from '@/shared/config/ui-strings';
 
 // ── Types ───────────────────────────────────────────────────────────
 
@@ -29,7 +30,7 @@ type GlobalStats = {
   totalVideos: number;
 };
 
-function formatStats(photos: number, videos: number, tGallery: any) {
+function formatStats(photos: number, videos: number, tGallery: UIStrings['galleryPage']) {
   const parts = [];
   if (photos > 0) parts.push(`${photos} ${photos === 1 ? tGallery.photo : tGallery.photos}`);
   if (videos > 0) parts.push(`${videos} ${videos === 1 ? tGallery.video : tGallery.videos}`);

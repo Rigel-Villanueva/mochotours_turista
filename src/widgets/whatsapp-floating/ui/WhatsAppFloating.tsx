@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
 import { FALLBACK_DATA } from '@/shared/config/public-data';
 import { useTranslation } from '@/shared/lib/TranslationProvider';
