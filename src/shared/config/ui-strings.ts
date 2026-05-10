@@ -8,6 +8,9 @@ export const UI_STRINGS = {
   es: {
     // ── Hero Section ──
     hero: {
+      badge: 'MOCHOTOURS | Homún, Yucatán',
+      heading: 'Cenotes Aventura y Más',
+      description: 'Tours guiados de 4 a 5 horas por los cenotes más impresionantes de Homún, Yucatán. Recorre hasta 4 cenotes en moto-taxi tradicional con Pedro Poot, guía local con más de 10 años de experiencia.',
       reserveWhatsApp: 'Reservar por WhatsApp',
       viewGallery: 'Ver la Galería',
       explore: 'Explorar',
@@ -169,6 +172,9 @@ export const UI_STRINGS = {
   en: {
     // ── Hero Section ──
     hero: {
+      badge: 'MOCHOTOURS | Homún, Yucatán',
+      heading: 'Cenotes Adventure & More',
+      description: '4 to 5 hour guided tours through the most impressive cenotes in Homún, Yucatán. Visit up to 4 cenotes in a traditional moto-taxi with Pedro Poot, a local guide with over 10 years of experience.',
       reserveWhatsApp: 'Book via WhatsApp',
       viewGallery: 'View Gallery',
       explore: 'Explore',

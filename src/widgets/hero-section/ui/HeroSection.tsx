@@ -27,9 +27,7 @@ export function HeroSection() {
     fetchHeroData();
   }, []);
 
-  // Preferimos Datos Servidor, Caemos Graciosamente a Datos Locales
-  const titulo = data?.titulo || FALLBACK_DATA.heroBanner.titulo;
-  const descripcion = data?.descripcion || FALLBACK_DATA.heroBanner.descripcion;
+  // Usamos textos estáticos traducidos para la UI, pero permitimos que la imagen provenga del Admin Panel.
   const imagenUrl = data?.imagenUrl || FALLBACK_DATA.heroBanner.imagenUrl;
   const washappNumber = FALLBACK_DATA.contacto.telefono_whatsapp_principal;
 
@@ -64,17 +62,17 @@ export function HeroSection() {
         
         {/* Subtitulillo Anunciador */}
         <span className="animate-in fade-in slide-in-from-bottom-4 duration-700 font-inter text-sm md:text-base tracking-[0.25em] text-white/80 uppercase font-medium mb-6">
-           MOCHOTOURS | Homún, Yucatán
+           {t.hero.badge}
         </span>
 
         {/* Título Monumental */}
         <h1 className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200 fill-mode-backwards font-fraunces text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight drop-shadow-2xl">
-          {titulo}
+          {t.hero.heading}
         </h1>
 
         {/* Descripción Larga */}
         <p className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-backwards font-inter text-base sm:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto mt-6 font-light leading-relaxed drop-shadow-lg text-balance">
-          {descripcion}
+          {t.hero.description}
         </p>
 
         {/* CALL TO ACTIONS */}
