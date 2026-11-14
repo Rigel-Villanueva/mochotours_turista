@@ -18,7 +18,7 @@ const CACHE_TIMESTAMP_KEY = 'mochotours_site_content_ts';
  * Obtiene contenido del sitio con fallback inteligente:
  * Backend → Cache localStorage → null (componente usa FALLBACK_DATA)
  */
-export async function getCachedSiteContent(): Promise<SiteContent | null> {
+async function fetchSiteContent(): Promise<SiteContent | null> {
   try {
     // Intentar obtener datos frescos del backend
     const data = await getSiteContent();
@@ -50,6 +50,21 @@ export async function getCachedSiteContent(): Promise<SiteContent | null> {
     // Sin cache — retornar null (el componente usará FALLBACK_DATA)
     return null;
   }
+}
+
+// Varios componentes de la misma página (hero, mapa, pie) piden el mismo contenido.
+// Se comparte una sola petición durante 60 s en vez de repetirla por componente.
+const SHARE_WINDOW_MS = 60_000;
+let sharedRequest: Promise<SiteContent | null> | null = null;
+let sharedAt = 0;
+
+export function getCachedSiteContent(): Promise<SiteContent | null> {
+  const now = Date.now();
+  if (!sharedRequest || now - sharedAt > SHARE_WINDOW_MS) {
+    sharedAt = now;
+    sharedRequest = fetchSiteContent();
+  }
+  return sharedRequest;
 }
 
 /**

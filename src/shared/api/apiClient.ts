@@ -196,7 +196,8 @@ async function get<T>(
   const doFetch = () => fetch(url.toString(), {
     method: 'GET',
     headers: buildHeaders(withAuth),
-    cache: 'no-store',
+    // Las lecturas públicas pueden usar la caché del navegador (el backend define cuánto).
+    cache: withAuth ? 'no-store' : 'default',
   });
 
   const response = await doFetch();
